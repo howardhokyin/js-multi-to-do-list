@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const AddToDo = ({ onSubmit }) => {
   const [newItem, setNewItem] = useState('');
@@ -14,19 +14,19 @@ const AddToDo = ({ onSubmit }) => {
 
   return (
     <div>
-      <h1>Add To Do here</h1>
-      <form onSubmit={handleAddTodo}>
+      <form onSubmit={handleAddTodo} className="">
         <div>
           {' '}
-          <label htmlFor="item">New task:</label>
           <input
             type="text"
             id="item"
+            className="textbox"
             value={newItem}
             onChange={(e) => setNewItem(e.target.value)}
+            placeholder="Add New Task here"
           />
         </div>
-        <button type="submit" className="add-btn">
+        <button type="submit" className="btn w-full">
           Add
         </button>
       </form>

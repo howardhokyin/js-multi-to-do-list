@@ -1,47 +1,127 @@
 import { useState, useEffect } from 'react';
-import AddToDo from './components/AddToDo';
-import ToDoList from './components/ToDoList';
+
+import DisplayToDoList from './components/DisplayToDoList';
+import AddList from './components/AddList';
+import AllToDoList from './components/AllToDoList';
+import CloseBtn from './components/CloseBtn';
+
+import '../src/index.css';
 
 function App() {
   const [todo, setTodo] = useState([]);
+  const [selectedTodo, setSelectedTodo] = useState(null);
 
   useEffect(() => {
-    console.log(todo);
+    if (selectedTodo) {
+      const updatedSelectedTodo = todo.find(
+        (item) => item.id === selectedTodo.id
+      );
+      if (updatedSelectedTodo) {
+        setSelectedTodo(updatedSelectedTodo);
+      }
+    }
   }, [todo]);
 
-  function HandleAdd(title) {
+  function HandleAddTitle(title) {
     setTodo((currentTodo) => [
       ...currentTodo,
-      { id: crypto.randomUUID(), title, completed: false },
+      { id: crypto.randomUUID(), title, tasks: [] },
     ]);
   }
 
-  function HandleDelete(id) {
-    console.log('click delete for ' + id);
-    setTodo(todo.filter((item) => item.id !== id));
+  function HandleAddTask(taskTitle) {
+    setTodo((currentTodo) =>
+      currentTodo.map((todo) => {
+        if (selectedTodo.id === todo.id) {
+          return {
+            ...todo,
+            tasks: [
+              ...todo.tasks,
+              { id: crypto.randomUUID(), title: taskTitle, completed: false },
+            ],
+          };
+        }
+        return todo;
+      })
+    );
   }
 
-  function ToggleTask(id, completed) {
+  function HandleDeleteList(listID) {
+    setTodo(todo.filter((list) => list.id !== listID));
+    if (selectedTodo.id === listID) {
+      setSelectedTodo(null);
+    }
+  }
+
+  function HandleDeleteTask(taskID) {
     setTodo((currentTodo) => {
-      return currentTodo.map((item) => {
-        if (item.id === id) {
-          return { ...item, completed };
-        }
-        return item;
+      return currentTodo.map((list) => {
+        return {
+          ...list,
+          tasks: list.tasks.filter((task) => task.id !== taskID),
+        };
       });
     });
   }
 
+  function ToggleTask(taskID, completed) {
+    setTodo((currentTodo) => {
+      return currentTodo.map((todoItem) => {
+        // Map over each todo item
+        return {
+          ...todoItem, // Copy all existing properties of the todo item
+          tasks: todoItem.tasks.map((task) => {
+            // Now, map over each task within this todo item
+            if (task.id === taskID) {
+              // If this task's id matches the id we're looking to update...
+              return { ...task, completed: completed }; // Update its 'completed' status
+            }
+            return task; // Otherwise, return the task as is
+          }),
+        };
+      });
+    });
+  }
+
+  function HandleSelect(listsId) {
+    setSelectedTodo('');
+    setSelectedTodo(todo.find((todo) => todo.id === listsId));
+  }
+
+  function HandleClose() {
+    setSelectedTodo(null);
+  }
+
   return (
-    <div>
-      <AddToDo onSubmit={HandleAdd} />
-      <h1> To Do List </h1>
-      {todo.length === 0 && 'No task on the list'}
-      <ToDoList
-        todo={todo}
-        HandleDelete={HandleDelete}
-        ToggleTask={ToggleTask}
-      />
+    <div className="flex flex-row bg-slate-200 min-h-screen">
+      <div className="w-2/5">
+        <AddList onSubmitList={HandleAddTitle} />
+        <AllToDoList
+          todo={todo}
+          HandleSelect={HandleSelect}
+          HandleDeleteList={HandleDeleteList}
+        />
+      </div>
+      <div className="ml-10 w-2/5">
+        {/* {selectedTodo.length === 0 && 'No task on the list'} */}
+        <DisplayToDoList
+          selectedTodo={selectedTodo}
+          HandleAddTask={HandleAddTask}
+          HandleDeleteTask={HandleDeleteTask}
+          ToggleTask={ToggleTask}
+          HandleClose={HandleClose}
+        />
+      </div>
+      <div className="">
+        {selectedTodo !== null && (
+          <button
+            className="btn btn-delete mt-5"
+            onClick={(e) => HandleClose()}
+          >
+            Close
+          </button>
+        )}
+      </div>
     </div>
   );
 }
