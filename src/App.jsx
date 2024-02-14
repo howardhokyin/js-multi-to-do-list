@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import DisplayToDoList from './components/DisplayToDoList';
 import AddList from './components/AddList';
 import AllToDoList from './components/AllToDoList';
-import CloseBtn from './components/CloseBtn';
 
 import '../src/index.css';
 
@@ -113,6 +112,27 @@ function App() {
     });
   }
 
+  function HandleEditTask(listID, taskID, editedTask) {
+    setTodo((currentTodo) => {
+      return currentTodo.map((list) => {
+        if (list.id === listID) {
+          // Update only the list that contains the task to be edited
+          return {
+            ...list,
+            tasks: list.tasks.map((task) => {
+              if (task.id === taskID) {
+                // Update the specific task
+                return { ...task, title: editedTask };
+              }
+              return task; // Return unmodified tasks
+            }),
+          };
+        }
+        return list; // Return unmodified lists
+      });
+    });
+  }
+
   return (
     <div className="flex flex-row bg-slate-200 min-h-screen">
       <div className="w-2/5">
@@ -132,6 +152,7 @@ function App() {
           HandleDeleteTask={HandleDeleteTask}
           ToggleTask={ToggleTask}
           HandleClose={HandleClose}
+          onSubmitEdit={HandleEditTask}
         />
       </div>
       <div className="">
