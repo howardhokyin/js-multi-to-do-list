@@ -87,6 +87,48 @@ function App() {
   function HandleClose() {
     setSelectedTodo(null);
   }
+  // This is why the error I got for editing
+  // function HandleEditList(listID, editedTitle) {
+  //   setTodo((currentTodo) => {
+  //     currentTodo.map((list) => {
+  //       if (list.id === listID) {
+  //         return { ...list, title: editedTitle };
+  //       }
+  //       return list;
+  //     });
+  //   });
+  // }
+  function HandleEditList(listID, editedTitle) {
+    setTodo((currentTodo) => {
+      return currentTodo.map((list) => {
+        if (list.id === listID) {
+          return { ...list, title: editedTitle };
+        }
+        return list;
+      });
+    });
+  }
+
+  function HandleEditTask(listID, taskID, editedTask) {
+    setTodo((currentTodo) => {
+      return currentTodo.map((list) => {
+        if (list.id === listID) {
+          // Update only the list that contains the task to be edited
+          return {
+            ...list,
+            tasks: list.tasks.map((task) => {
+              if (task.id === taskID) {
+                // Update the specific task
+                return { ...task, title: editedTask };
+              }
+              return task; // Return unmodified tasks
+            }),
+          };
+        }
+        return list; // Return unmodified lists
+      });
+    });
+  }
 
   return (
     <div className="flex sm:flex-row bg-slate-200 min-h-screen flex-col">
@@ -96,6 +138,7 @@ function App() {
           todo={todo}
           HandleSelect={HandleSelect}
           HandleDeleteList={HandleDeleteList}
+          onSubmitEdit={HandleEditList}
         />
       </div>
 
