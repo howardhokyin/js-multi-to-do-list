@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import DisplayToDoList from './components/DisplayToDoList';
 import AddList from './components/AddList';
 import AllToDoList from './components/AllToDoList';
-import CloseBtn from './components/CloseBtn';
 
 import '../src/index.css';
 
@@ -67,16 +66,13 @@ function App() {
   function ToggleTask(taskID, completed) {
     setTodo((currentTodo) => {
       return currentTodo.map((todoItem) => {
-        // Map over each todo item
         return {
-          ...todoItem, // Copy all existing properties of the todo item
+          ...todoItem,
           tasks: todoItem.tasks.map((task) => {
-            // Now, map over each task within this todo item
             if (task.id === taskID) {
-              // If this task's id matches the id we're looking to update...
-              return { ...task, completed: completed }; // Update its 'completed' status
+              return { ...task, completed: completed };
             }
-            return task; // Otherwise, return the task as is
+            return task;
           }),
         };
       });
@@ -93,8 +89,8 @@ function App() {
   }
 
   return (
-    <div className="flex flex-row bg-slate-200 min-h-screen">
-      <div className="w-2/5">
+    <div className="flex sm:flex-row bg-slate-200 min-h-screen flex-col">
+      <div className="sm:w-2/5 w-full">
         <AddList onSubmitList={HandleAddTitle} />
         <AllToDoList
           todo={todo}
@@ -102,25 +98,37 @@ function App() {
           HandleDeleteList={HandleDeleteList}
         />
       </div>
-      <div className="ml-10 w-2/5">
-        {/* {selectedTodo.length === 0 && 'No task on the list'} */}
-        <DisplayToDoList
-          selectedTodo={selectedTodo}
-          HandleAddTask={HandleAddTask}
-          HandleDeleteTask={HandleDeleteTask}
-          ToggleTask={ToggleTask}
-          HandleClose={HandleClose}
-        />
-      </div>
-      <div className="">
-        {selectedTodo !== null && (
-          <button
-            className="btn btn-delete mt-5"
-            onClick={(e) => HandleClose()}
-          >
-            Close
-          </button>
-        )}
+
+      <div className="flex flex-col sm:ml-10 sm:flex-row w-full sm:w-3/5 mr-3">
+        <div className="sm:hidden block">
+          {selectedTodo !== null && (
+            <button
+              className="btn btn-delete mt-5 w-full"
+              onClick={(e) => HandleClose()}
+            >
+              Close
+            </button>
+          )}
+        </div>
+        <div className="w-full">
+          <DisplayToDoList
+            selectedTodo={selectedTodo}
+            HandleAddTask={HandleAddTask}
+            HandleDeleteTask={HandleDeleteTask}
+            ToggleTask={ToggleTask}
+            HandleClose={HandleClose}
+          />
+        </div>
+        <div className="hidden sm:block">
+          {selectedTodo !== null && (
+            <button
+              className="btn btn-delete mt-5 w-full"
+              onClick={(e) => HandleClose()}
+            >
+              Close
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

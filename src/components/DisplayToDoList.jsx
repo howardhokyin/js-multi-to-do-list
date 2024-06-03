@@ -14,7 +14,7 @@ const DisplayToDoList = ({
   }
 
   return (
-    <div className="my-5">
+    <div className="my-5 mx-5">
       <AddToDo onSubmit={HandleAddTask} />
       <h1 className="text-center my-5">
         <span>Title: </span>
