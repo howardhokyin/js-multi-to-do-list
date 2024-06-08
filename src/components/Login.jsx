@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { firebaseAuth } from '../server/firebase';
 
 const Login = () => {
-  const handleLogin = () => {
-    window.open('http://localhost:3000/auth/google', '_self');
-  };
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, isLoading] = useState(false);
+  const auth = firebaseAuth;
+
   return (
     <div>
-      <h3>Google Login</h3>
-      <button onClick={handleLogin}>Login with Google</button>
+      <h3>Login</h3>
+      <form onSubmit={handleLogin}>
+        <label>Email</label>
+        <label>Password</label>
+      </form>
+
+      <button onClick={handleGoogleLogin}>Continue with Google</button>
     </div>
   );
 };
