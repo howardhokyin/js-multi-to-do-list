@@ -5,7 +5,7 @@ import AddList from './components/AddList';
 import AllToDoList from './components/AllToDoList';
 
 import '../src/index.css';
-import ClearLocalStorageButton from './components/reusable/ClearLocalstorageButton';
+import ClearLocalStorageButton from './components/ClearLocalStorageButton';
 
 function App() {
   const [existTodo, setExistTodo] = useState([]);
