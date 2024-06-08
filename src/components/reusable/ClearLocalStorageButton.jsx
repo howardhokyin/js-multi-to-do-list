@@ -9,7 +9,7 @@ const ClearLocalStorageButton = () => {
   return (
     <div className="flex my-5 mx-5">
       <button onClick={handleClearLocalStorage} className="btn btn-delete ">
-        Clear LocalStorage
+        Clear Local Storage
       </button>
     </div>
   );
