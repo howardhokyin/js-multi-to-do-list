@@ -5,9 +5,15 @@ import AddList from './components/AddList';
 import AllToDoList from './components/AllToDoList';
 
 import '../src/index.css';
+import ClearLocalStorageButton from './components/reusable/ClearLocalstorageButton';
 
 function App() {
-  const [todo, setTodo] = useState([]);
+  const [existTodo, setExistTodo] = useState([]);
+  const savedTodos = localStorage.getItem('todo');
+  const [isLocalStorageExist, setIsLocalStorageExist] = useState(false);
+  const [todo, setTodo] = useState(() => {
+    return savedTodos ? JSON.parse(savedTodos) : [];
+  });
   const [selectedTodo, setSelectedTodo] = useState(null);
 
   useEffect(() => {
@@ -19,7 +25,15 @@ function App() {
         setSelectedTodo(updatedSelectedTodo);
       }
     }
+    setExistTodo(todo);
   }, [todo]);
+
+  useEffect(() => {
+    localStorage.setItem('todo', JSON.stringify(existTodo));
+    if (todo.length > 0) {
+      setIsLocalStorageExist(true);
+    }
+  }, [existTodo]);
 
   function HandleAddTitle(title) {
     setTodo((currentTodo) => [
@@ -140,6 +154,7 @@ function App() {
           HandleDeleteList={HandleDeleteList}
           onSubmitEdit={HandleEditList}
         />
+        {isLocalStorageExist && <ClearLocalStorageButton />}
       </div>
 
       <div className="flex flex-col sm:ml-10 sm:flex-row w-full sm:w-3/5 mr-3">
