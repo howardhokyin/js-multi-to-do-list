@@ -34,7 +34,7 @@ const AllToDoList = ({
           todo.map((list) => (
             <li
               key={list.id}
-              className="w-full flex justify-between items-center"
+              className="w-full flex justify-between items-center mt-2"
             >
               {isEdit && editID === list.id ? (
                 <form
