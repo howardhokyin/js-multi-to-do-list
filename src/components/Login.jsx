@@ -21,11 +21,13 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <Link to="/register"> Register </Link>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <div>
+    <div className="bg-slate-200 min-h-screen boarder flex flex-col items-center">
+      <h1 className="mb-4">Login</h1>
+      <form
+        onSubmit={handleLogin}
+        className="border border-spacing-2 border-black p-4"
+      >
+        <div className="mb-2">
           <label>Email:</label>
           <input
             type="email"
@@ -33,7 +35,7 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div>
+        <div className="mb-4">
           <label>Password:</label>
           <input
             type="password"
@@ -41,8 +43,13 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" className="btn">
+          Login
+        </button>
       </form>
+      <button className="btn">
+        <Link to="/register"> Register </Link>
+      </button>
     </div>
   );
 };

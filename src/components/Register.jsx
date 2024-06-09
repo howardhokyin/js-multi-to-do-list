@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { firebaseAuth } from '../server/firebase';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -22,11 +22,14 @@ const Register = () => {
   };
 
   return (
-    <div className="register-container">
-      <h2>Register</h2>
+    <div className="bg-slate-200 min-h-screen boarder flex flex-col items-center">
+      <h1 className="mb-4">Register</h1>
       {error && <p className="error">{error}</p>}
-      <form onSubmit={handleRegister}>
-        <div>
+      <form
+        onSubmit={handleRegister}
+        className="border border-spacing-2 border-black p-4"
+      >
+        <div className="mb-2">
           <label>Email:</label>
           <input
             type="email"
@@ -35,7 +38,7 @@ const Register = () => {
             required
           />
         </div>
-        <div>
+        <div className="mb-4">
           <label>Password:</label>
           <input
             type="password"
@@ -44,8 +47,13 @@ const Register = () => {
             required
           />
         </div>
-        <button type="submit">Register</button>
+        <button type="submit" className="btn">
+          Create account
+        </button>
       </form>
+      <button className="btn btn-delete">
+        <Link to="/login"> Back </Link>
+      </button>
     </div>
   );
 };
