@@ -1,7 +1,7 @@
 // Register.jsx
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from './firebase';
+import { firebaseAuth } from '../server/firebase';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
@@ -14,7 +14,7 @@ const Register = () => {
     e.preventDefault();
     setError('');
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(firebaseAuth, email, password); //createUserWithEmailAndPassword
       navigate('/');
     } catch (error) {
       setError(error.message);

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { firebaseAuth } from '../server/firebase';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -21,6 +22,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      <Link to="/register"> Register </Link>
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div>
