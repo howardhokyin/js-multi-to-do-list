@@ -2,6 +2,33 @@
 
 ## What I learn
 
+### react-router-dom
+
+- useNavigate
+
+### firebase
+
+1. npm install firebase
+2. Firebase config
+   Created firebase.js
+
+   ```js
+   const firebaseConfig = {
+     apiKey: 'YOUR_API_KEY',
+     authDomain: 'YOUR_AUTH_DOMAIN',
+     projectId: 'YOUR_PROJECT_ID',
+     storageBucket: 'YOUR_STORAGE_BUCKET',
+     messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
+     appId: 'YOUR_APP_ID',
+   };
+   ```
+
+3. Create sign-in and sign-up.jsx
+   createUserWithEmailAndPassword(firebaseAuth,email,password)
+   signInWithEmailAndPassword(firebaseAuth,email,password)
+
+4. setDoc/getDoc/doc
+
 ## React
 
 - for the case below, it show if two same setTodo what will happen.
