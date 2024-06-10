@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
+// src/components/UserProfile.jsx
+import React, { useEffect, useState } from 'react';
 import { firebaseAuth } from '../../server/firebase';
 
 const UserProfile = () => {
-  const user = firebaseAuth.currentUser;
-  const [isLogin, setIsLogin] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
-    <div className="">
-      {user !== null ? (
-        <div>
-          <p>Welcome</p>
-        </div>
+    <div className="text-right">
+      {user ? (
+        <p>Welcome, {user.displayName || user.email}</p>
       ) : (
         <p>No user is logged in</p>
       )}
