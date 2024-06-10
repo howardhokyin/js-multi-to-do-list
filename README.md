@@ -2,11 +2,17 @@
 
 ## What I learn
 
-### react-router-dom
+### Custom Hook
+
+- Rules
+
+1. Must start with "use" e.g. useCounter, useAuth.
+
+### React-router-dom
 
 - useNavigate
 
-### firebase
+### Firebase
 
 1. npm install firebase
 2. Firebase config
