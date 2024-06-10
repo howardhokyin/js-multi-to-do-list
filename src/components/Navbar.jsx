@@ -1,7 +1,7 @@
 // NavBar.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Profile } from './reusable/profile';
+import UserProfile from './reusable/UserProfile';
 
 const NavBar = () => {
   return (
@@ -15,7 +15,7 @@ const NavBar = () => {
           Login
         </Link>
       </nav>
-      <Profile className="text-right" />
+      <UserProfile className="text-right" />
     </div>
   );
 };
