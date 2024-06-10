@@ -1,10 +1,11 @@
 // Register.jsx
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { firebaseAuth } from '../server/firebase';
 import { useNavigate, Link } from 'react-router-dom';
 
 const Register = () => {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -14,7 +15,15 @@ const Register = () => {
     e.preventDefault();
     setError('');
     try {
-      await createUserWithEmailAndPassword(firebaseAuth, email, password); //createUserWithEmailAndPassword
+      const userCredential = await createUserWithEmailAndPassword(
+        firebaseAuth,
+        email,
+        password
+      ); //createUserWithEmailAndPassword
+      const user = userCredential.user;
+      await updateProfile(user, {
+        displayName: username,
+      });
       navigate('/');
     } catch (error) {
       setError(error.message);
@@ -29,6 +38,15 @@ const Register = () => {
         onSubmit={handleRegister}
         className="border border-spacing-2 border-black p-4"
       >
+        <div className="mb-2">
+          <label>User Name:</label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
         <div className="mb-2">
           <label>Email:</label>
           <input

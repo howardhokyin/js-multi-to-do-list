@@ -1,9 +1,10 @@
 // NavBar.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import UserProfile from './reusable/UserProfile';
 
 const NavBar = () => {
+  const [isLogin, setIsLogin] = useState(false);
   return (
     <div className="flex items-center gap-5 bg-slate-200 p-3">
       <h1 className="flex-1 text-left font-bold">To Do List</h1>

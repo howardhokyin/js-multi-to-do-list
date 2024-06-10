@@ -14,6 +14,8 @@
 
 ### Firebase
 
+- Set up Firebase for auth
+
 1. npm install firebase
 2. Firebase config
    Created firebase.js
@@ -32,6 +34,7 @@
 3. Create sign-in and sign-up.jsx
    createUserWithEmailAndPassword(firebaseAuth,email,password)
    signInWithEmailAndPassword(firebaseAuth,email,password)
+   signOut(firebaseAuth)
 
 4. setDoc/getDoc/doc
 

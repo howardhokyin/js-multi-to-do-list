@@ -12,13 +12,13 @@ const UserProfile = () => {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [user]);
 
   return (
     <div className="text-right">
       {user ? (
-        <div>
-          <p>Welcome, {user.displayName || user.email}</p>
+        <div className="flex flex-row items-center space-x-2">
+          <p>Welcome, {user.displayName}</p>
           <SignOutButton />
         </div>
       ) : (
