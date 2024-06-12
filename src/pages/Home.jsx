@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import DisplayToDoList from './DisplayToDoList';
-import AddList from './AddList';
-import AllToDoList from './AllToDoList';
-import LoginPage from './Login.jsx';
+import DisplayToDoList from '../components/DisplayToDoList.jsx';
+import AddTitle from '../components/AddTitle.jsx';
+import AllToDoList from '../components/AllToDoList.jsx';
+import LoginPage from './LoginPage.jsx';
 import '../../src/index.css';
-import ClearLocalStorageButton from './reusable/ClearLocalStorageButton';
+import ClearLocalStorageButton from '../components/reusable/ClearLocalStorageButton.jsx';
 
 function Home() {
   const [existTodo, setExistTodo] = useState([]);
@@ -148,7 +148,7 @@ function Home() {
     <div>
       <div className="flex sm:flex-row bg-slate-200 min-h-screen flex-col">
         <div className="sm:w-2/5 w-full">
-          <AddList onSubmitList={HandleAddTitle} />
+          <AddTitle onSubmitList={HandleAddTitle} />
           <AllToDoList
             todo={todo}
             HandleSelect={HandleSelect}

@@ -1,10 +1,11 @@
 // App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import LoginPage from './components/Login';
-import HomePage from './components/Home';
+import LoginPage from './pages/LoginPage';
+import HomePage from './pages/Home';
 import NavBar from './components/Navbar';
 import RegisterPage from './components/Register';
+import MarkDownNotePage from './pages/MarkDownNotePage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/" element={<HomePage />} />
+        <Route path="/MarkDownNote" element={<MarkDownNotePage />} />
       </Routes>
     </Router>
   );

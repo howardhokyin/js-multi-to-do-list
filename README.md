@@ -1,4 +1,24 @@
-# React + Tailwind + vite
+## Stack
+
+React + Vite + Tailwind
+
+## Descriptions
+
+### `components/`
+
+This folder contains reusable UI components.
+
+### `hooks/`
+
+This folder contains custom React hooks.
+
+### `pages/`
+
+This folder contains the main pages of your application.
+
+### `server/`
+
+This folder contains backend-related code.
 
 ## What I learn
 

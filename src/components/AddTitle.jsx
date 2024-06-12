@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const AddList = ({ onSubmitList }) => {
+const AddTitle = ({ onSubmitList }) => {
   const [newTitle, setNewTitle] = useState('');
 
   function HandleAddTitle(e) {
@@ -20,10 +20,10 @@ const AddList = ({ onSubmitList }) => {
         placeholder="Type the list title here"
       />
       <button type="submit" className="btn w-full">
-        Add New List
+        New Title
       </button>
     </form>
   );
 };
 
-export default AddList;
+export default AddTitle;
