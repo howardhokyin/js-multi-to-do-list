@@ -1,8 +1,16 @@
+# Multi To do List
+
 ## Stack
 
-React + Vite + Tailwind
+React + Vite + Tailwind + Firebase auth
 
 ## Descriptions
+
+- Creating to-do list.
+- Selecting list and display on a side.
+- Add new task for each list.
+- Able to check the completed task.
+- Edit list title and task.
 
 ### `components/`
 
